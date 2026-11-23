@@ -4,6 +4,10 @@ import { request } from '../helpers';
 jest.mock('../helpers');
 
 describe('getData Tests', () => {
+  beforeEach(() => {
+    request.mockReset();
+  });
+
   const safelyCallApi = async () => {
     try {
       return await getData();
@@ -70,6 +74,54 @@ describe('getData Tests', () => {
 
     return expect(safelyCallApi()).resolves.toEqual([
       { apiUrl: '/api/xj.json', id: 'xj', price: '£40,000' },
+    ]);
+  });
+
+  it('rejects a non-array list response', async () => {
+    request.mockResolvedValueOnce({});
+    await expect(getData()).rejects.toThrow('Vehicle list response must be an array');
+  });
+
+  it('skips summaries with invalid detail URLs', async () => {
+    request.mockResolvedValueOnce([null, {}, { apiUrl: '' }, { apiUrl: 42 }]);
+    await expect(getData()).resolves.toEqual([]);
+    expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it('skips whitespace-only prices and merges valid detail fields over summaries', async () => {
+    request.mockResolvedValueOnce([
+      {
+        id: 'xe', apiUrl: '/xe', description: 'Summary', media: ['image'],
+      },
+      { id: 'xf', apiUrl: '/xf' },
+    ]);
+    request.mockResolvedValueOnce({ price: '£30,000', description: 'Detail' });
+    request.mockResolvedValueOnce({ price: '  ' });
+
+    await expect(getData()).resolves.toEqual([
+      {
+        id: 'xe',
+        apiUrl: '/xe',
+        description: 'Detail',
+        media: ['image'],
+        price: '£30,000',
+      },
+    ]);
+  });
+
+  it('preserves list order when detail requests complete out of order', async () => {
+    let resolveFirst;
+    const first = new Promise((resolve) => { resolveFirst = resolve; });
+    request.mockResolvedValueOnce([{ apiUrl: '/first' }, { apiUrl: '/second' }]);
+    request.mockReturnValueOnce(first);
+    request.mockResolvedValueOnce({ id: 'second', price: '£2' });
+
+    const result = getData();
+    await Promise.resolve();
+    resolveFirst({ id: 'first', price: '£1' });
+    await expect(result).resolves.toEqual([
+      { apiUrl: '/first', id: 'first', price: '£1' },
+      { apiUrl: '/second', id: 'second', price: '£2' },
     ]);
   });
 });
