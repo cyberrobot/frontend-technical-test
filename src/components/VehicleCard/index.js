@@ -30,6 +30,7 @@ export default function VehicleCard({ vehicle }) {
     const wideImageUrl = wideImage ? wideImage.url : undefined;
     const dialogRef = useRef(null);
     const buttonRef = useRef(null);
+    const titleRef = useRef(null);
 
     return (
         <article className="vehicle-card">
@@ -65,7 +66,10 @@ export default function VehicleCard({ vehicle }) {
                         type="button"
                         ref={buttonRef}
                         aria-label={`View details for ${name}`}
-                        onClick={() => dialogRef.current.showModal()}
+                        onClick={() => {
+                            dialogRef.current.showModal();
+                            titleRef.current.focus();
+                        }}
                     >
                         View details
                     </button>
@@ -76,6 +80,8 @@ export default function VehicleCard({ vehicle }) {
                 meta={vehicle.meta}
                 dialogRef={dialogRef}
                 buttonRef={buttonRef}
+                titleRef={titleRef}
+                titleId={`vehicle-dialog-title-${vehicle.id}`}
             />
         </article>
     );

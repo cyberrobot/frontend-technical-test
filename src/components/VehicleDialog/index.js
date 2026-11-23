@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 export default function VehicleDialog({
-  name, meta, dialogRef, buttonRef,
+  name, meta, dialogRef, buttonRef, titleRef, titleId,
 }) {
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -25,8 +25,8 @@ export default function VehicleDialog({
   ].filter(([, value]) => value !== null && value !== undefined && value !== '');
 
   return (
-    <dialog className="vehicle-dialog" ref={dialogRef} aria-label={`${name} details`}>
-      <h2>{`${name} details`}</h2>
+    <dialog className="vehicle-dialog" ref={dialogRef} aria-labelledby={titleId}>
+      <h2 id={titleId} ref={titleRef} tabIndex={-1}>{`${name} details`}</h2>
       {details.length ? (
         <dl>
           {details.map(([label, value]) => (
