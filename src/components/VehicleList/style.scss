@@ -1,3 +1,123 @@
-.VehicleList {
+.vehicle-list__heading {
+  margin: 1.5rem;
+}
+
+.vehicle-list__items {
+  display: grid;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vehicle-list__item {
+  min-width: 0;
+}
+
+.vehicle-card {
+  align-items: stretch;
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+}
+
+.vehicle-card__image {
+  display: block;
+  height: 100%;
+}
+
+.vehicle-card__image img {
+  aspect-ratio: 1;
+  display: block;
+  height: auto;
   width: 100%;
+}
+
+.vehicle-card__content {
+  border-bottom: 1px solid #e1e5e5;
+  padding: 1rem 1.5rem;
+}
+
+.vehicle-card__name {
+  color: #171c22;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.vehicle-card__price,
+.vehicle-card__description {
+  color: #555b60;
+  font-size: 1.15rem;
+}
+
+.vehicle-card__price {
+  margin: 0;
+}
+
+.vehicle-card__description {
+  margin: .5rem 0 0;
+}
+
+@media (min-width: 48rem) {
+
+  .vehicle-list__items {
+    align-items: stretch;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vehicle-list__item {
+    display: flex;
+  }
+
+  .vehicle-card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .vehicle-card__image {
+    height: auto;
+  }
+
+  .vehicle-card__image img {
+    aspect-ratio: 16 / 9;
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  .vehicle-card__content {
+    border-bottom-width: 0;
+    border-right: 1px solid #e1e5e5;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1.5rem 1rem;
+  }
+
+  .vehicle-card__name {
+    font-size: 1.25rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .vehicle-card__inner-name {
+    border-bottom: 2px solid #171c22;
+    border-top: 2px solid #171c22;
+  }
+
+  .vehicle-card__price,
+  .vehicle-card__description {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 75rem) {
+
+  .vehicle-list__items {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }

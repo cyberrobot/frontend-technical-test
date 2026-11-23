@@ -8,17 +8,24 @@ export default function VehicleList() {
   const [loading, error, vehicles] = useData();
 
   if (loading) {
-    return <div data-testid="loading">Loading</div>;
+    return (
+      <div data-testid="loading" role="status">
+        Loading
+      </div>
+    );
   }
 
   if (error) {
-    return <div data-testid="error">{error}</div>;
+    return (
+      <div data-testid="error" role="alert">
+        {error}
+      </div>
+    );
   }
 
   return (
     <div data-testid="results">
       <main className="vehicle-list">
-        <h1 className="vehicle-list__heading">Our vehicles</h1>
         {vehicles.length === 0 ? (
           <p>No vehicles are currently available.</p>
         ) : (
