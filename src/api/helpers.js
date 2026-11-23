@@ -5,11 +5,11 @@
  * @return {Promise<Object>}
  */
 export async function request(apiUrl) {
-    const response = await fetch(apiUrl);
+  const response = await fetch(apiUrl);
 
-    if (!response.ok) {
-        throw new Error(`Request failed (${response.status}): ${apiUrl}`);
-    }
+  if (!response.ok) {
+    throw new Error(`Request failed (${response.status}): ${apiUrl}`);
+  }
 
-    return response.json();
+  return response.json();
 }

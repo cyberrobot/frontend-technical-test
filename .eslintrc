@@ -4,8 +4,8 @@
     "parserOptions": {
         "ecmaVersion": 6,
         "ecmaFeatures": {
-            "jsx": true
-        }
+            "jsx": true,
+        },
     },
     "env": {
         "browser": true,
@@ -13,7 +13,7 @@
         "mocha": true,
         "es6": true,
         "jest": true,
-        "jquery": true
+        "jquery": true,
     },
     "rules": {
         "import/prefer-default-export": "off",
@@ -28,15 +28,18 @@
         "semi": "warn",
         "arrow-body-style": "off",
         "comma-dangle": "off",
-        "max-len":"off",
+        "max-len": "off",
         "react/jsx-closing-tag-location": "off",
         "react/no-multi-comp": "off",
-        "jsx-a11y/label-has-for": [ 2, {
-            "components": [ "Label" ],
-            "required": {
-                "some": [ "nesting", "id" ]
+        "jsx-a11y/label-has-for": [
+            2,
+            {
+                "components": ["Label"],
+                "required": {
+                    "some": ["nesting", "id"],
+                },
+                "allowChildren": false,
             },
-            "allowChildren": false
-        }]
-    }
+        ],
+    },
 }
