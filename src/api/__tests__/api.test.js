@@ -49,7 +49,7 @@ describe('getData Tests', () => {
     request.mockResolvedValueOnce({ id: 'ftype', price: '£36,000' });
     request.mockRejectedValueOnce('An error occurred');
 
-    expect(safelyCallApi()).resolves.toEqual([
+    return expect(safelyCallApi()).resolves.toEqual([
       {
         apiUrl: '/api/vehicle_ftype.json',
         id: 'ftype',
