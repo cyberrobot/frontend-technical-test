@@ -31,6 +31,10 @@
 .vehicle-card__content {
     border-bottom: 1px solid #e1e5e5;
     padding: 1rem 1.5rem;
+    justify-content: space-between;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
 .vehicle-card__name {
@@ -54,6 +58,38 @@
 
 .vehicle-card__description {
     margin: 0.5rem 0 0;
+}
+
+.vehicle-card__details-button {
+    align-self: center;
+}
+
+.vehicle-dialog {
+    border: 0;
+    box-sizing: border-box;
+    color: #171c22;
+    max-height: calc(100vh - 2rem);
+    max-width: calc(100vw - 2rem);
+    overflow: auto;
+    padding: 1.5rem;
+    width: 30rem;
+}
+
+.vehicle-dialog::backdrop {
+    background: rgb(0 0 0 / 65%);
+}
+
+.vehicle-dialog dt {
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.vehicle-dialog dd {
+    margin: 0;
+}
+
+.vehicle-dialog button {
+    cursor: pointer;
 }
 
 @media (min-width: 48rem) {
@@ -87,10 +123,7 @@
     .vehicle-card__content {
         border-bottom-width: 0;
         border-right: 1px solid #e1e5e5;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: flex-start;
+
         padding: 1.5rem 1rem;
     }
 
