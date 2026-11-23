@@ -26,7 +26,7 @@ export default function VehicleList() {
   return (
     <div data-testid="results">
       <main className="vehicle-list">
-        <h1 className="vehicle-list__heading">Our vehicles</h1>
+        <h1 className="visually-hidden">Our vehicles</h1>
         {vehicles.length === 0 ? (
           <p>No vehicles are currently available.</p>
         ) : (
