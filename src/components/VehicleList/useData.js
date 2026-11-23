@@ -9,13 +9,10 @@ export default function useData() {
   useEffect(() => {
     getData()
       .then((response) => setVehicles(response))
-      .catch((err) => setError(err))
+    // React can render strings and numbers, but not an Error object.
+      .catch((err) => setError(err.message || 'Unable to load vehicles'))
       .finally(() => setLoading(false));
   }, []);
 
-  return [
-    loading,
-    error,
-    vehicles,
-  ];
+  return [loading, error, vehicles];
 }

@@ -8,11 +8,19 @@ export default function VehicleList() {
   const [loading, error, vehicles] = useData();
 
   if (loading) {
-    return <div data-testid="loading">Loading</div>;
+    return (
+      <div data-testid="loading" role="status">
+        Loading
+      </div>
+    );
   }
 
   if (error) {
-    return <div data-testid="error">{error}</div>;
+    return (
+      <div data-testid="error" role="alert">
+        {error}
+      </div>
+    );
   }
 
   return (
