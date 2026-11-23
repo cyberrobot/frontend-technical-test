@@ -10,6 +10,27 @@
     min-width: 0;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    .vehicle-list__item {
+        animation: vehicle-card-fade-in 300ms ease-out both;
+        animation-delay: var(--fade-delay);
+    }
+
+    .vehicle-list__item:focus-within {
+        opacity: 1 !important;
+    }
+}
+
+@keyframes vehicle-card-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 .vehicle-card {
     align-items: stretch;
     display: grid;

@@ -32,4 +32,21 @@ describe('<VehicleList /> Tests', () => {
     expect(queryByTestId('error')).toBeNull();
     expect(queryByTestId('results')).not.toBeNull();
   });
+
+  it('assigns staggered delays with a cap to vehicle cards', () => {
+    const vehicles = Array.from({ length: 12 }, (_, index) => ({
+      id: `vehicle-${index}`,
+      price: '£30,000',
+    }));
+    useData.mockReturnValue([false, false, vehicles]);
+    const { getAllByRole, rerender } = render(<VehicleList />);
+    const items = getAllByRole('listitem');
+
+    expect(items[0].style.getPropertyValue('--fade-delay')).toBe('0ms');
+    expect(items[1].style.getPropertyValue('--fade-delay')).toBe('50ms');
+    expect(items[11].style.getPropertyValue('--fade-delay')).toBe('500ms');
+
+    rerender(<VehicleList />);
+    expect(getAllByRole('listitem')[1]).toBe(items[1]);
+  });
 });

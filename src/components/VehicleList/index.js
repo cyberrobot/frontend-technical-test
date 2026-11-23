@@ -31,8 +31,12 @@ export default function VehicleList() {
           <p>No vehicles are currently available.</p>
         ) : (
           <ul className="vehicle-list__items">
-            {vehicles.map((vehicle) => (
-              <li className="vehicle-list__item" key={vehicle.id}>
+            {vehicles.map((vehicle, index) => (
+              <li
+                className="vehicle-list__item"
+                key={vehicle.id}
+                style={{ '--fade-delay': `${Math.min(index * 50, 500)}ms` }}
+              >
                 <VehicleCard vehicle={vehicle} />
               </li>
             ))}
