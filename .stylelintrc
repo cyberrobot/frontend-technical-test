@@ -3,7 +3,6 @@
     "rules": {
         "selector-max-specificity": "1,2,0",
         "order/order": ["custom-properties", "declarations", "rules"],
-        "order/properties-order": ["width", "height"],
         "order/properties-alphabetical-order": true
     }
 }
