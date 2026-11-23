@@ -51,6 +51,7 @@ describe('<VehicleCard />', () => {
 
     expect(dialog.showModal).toHaveBeenCalledTimes(1);
     expect(getByRole('dialog', { name: 'I-PACE details' })).toBe(dialog);
+    expect(document.activeElement).toBe(getByRole('heading', { name: 'I-PACE details' }));
     expect(getByText('CO2 Emissions 0 g/km')).not.toBeNull();
     expect(getByText('SUV')).not.toBeNull();
     expect(getByText('AWD')).not.toBeNull();
