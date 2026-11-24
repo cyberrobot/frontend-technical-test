@@ -8,6 +8,8 @@
     "build": "webpack --mode production",
     "test": "jest",
     "test:watch": "npm run test -- --watch",
+    "test:browser": "playwright test",
+    "test:browser:update": "playwright test --update-snapshots",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint \"src/**/*.js\" --fix",
     "lint:css": "stylelint \"src/**/*.scss\" --fix"
@@ -15,9 +17,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@axe-core/playwright": "4.8.2",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@playwright/test": "1.39.0",
     "@testing-library/react": "^11.2.3",
     "babel-eslint": "^8.1.2",
     "babel-loader": "^8.2.2",
@@ -57,5 +61,8 @@
   },
   "browserslist": [
     "last 2 chrome versions"
-  ]
+  ],
+  "overrides": {
+    "playwright-core": "1.39.0"
+  }
 }
