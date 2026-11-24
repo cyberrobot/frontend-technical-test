@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
+const { waitForImages, expectNoModalOverflow } = require('./helpers');
 
 const vehicles = ['xe', 'xf'].map((id) => ({
     id,
@@ -33,12 +34,7 @@ async function loadVehicles(page) {
     await expect(
         page.getByRole('button', { name: 'View details for XE' }),
     ).toBeVisible();
-    await page.evaluate(async () => {
-        await document.fonts.ready;
-        await Promise.all(
-            Array.from(document.images, (image) => image.decode()),
-        );
-    });
+    await waitForImages(page);
 }
 
 async function expectNoViolations(page) {
@@ -135,6 +131,10 @@ test('vehicle list visual baseline', async ({ page }) => {
 
 test('modal visual baseline', async ({ page }) => {
     await page.getByRole('button', { name: 'View details for XE' }).click();
+    await expectNoModalOverflow(
+        page,
+        page.getByRole('dialog', { name: 'XE details' }),
+    );
     await expect(page).toHaveScreenshot('vehicle-modal.png', {
         fullPage: true,
         animations: 'disabled',

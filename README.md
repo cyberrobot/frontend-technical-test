@@ -81,13 +81,17 @@ npm run lint
 
 ## Browser accessibility and visual tests
 
-The separate Playwright suite uses Chromium and deterministic API fixtures. With
-Node 16.20.2 selected, run:
+The separate Playwright suite uses installed Google Chrome through
+`channel: 'chrome'` in `playwright.config.js`. Install the latest stable
+[Google Chrome](https://www.google.com/chrome/) before running the suite.
+If Chrome is not installed, you can also install it with
+`npx playwright install chrome`. Installing Playwright's Chromium alone is not sufficient.
+
+With Node 16.20.2 selected via `.nvmrc`, run:
 
 ```sh
-nvm use 16
+nvm use
 npm install
-npx playwright install chromium
 npm run test:browser
 ```
 
@@ -97,5 +101,5 @@ against the designs and committed. Review any later screenshot changes before
 updating them. Snapshots compare against the approved baseline, not directly
 against the supplied designs. No reviewed baselines are included yet.
 
-The pinned Playwright version supports Node 16 but uses an older Chromium;
-also verify the application in the latest Chrome.
+The pinned Playwright version supports Node 16. Keep Google Chrome up to date
+to verify the README's latest-Chrome browser support requirement.
