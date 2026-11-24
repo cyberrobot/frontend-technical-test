@@ -94,9 +94,28 @@
     margin: 0;
     max-height: 100%;
     max-width: 100%;
+    opacity: 0;
     overflow: auto;
     padding: 0;
+    transform: translateY(0.25rem);
+    transition:
+        opacity 180ms ease-out,
+        transform 180ms ease-out,
+        overlay 180ms allow-discrete,
+        display 180ms allow-discrete;
     width: 100%;
+}
+
+.vehicle-dialog[open] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@starting-style {
+    .vehicle-dialog[open] {
+        opacity: 0;
+        transform: translateY(0.25rem);
+    }
 }
 
 .vehicle-dialog__header {
@@ -185,6 +204,24 @@
 
 .vehicle-dialog::backdrop {
     background: rgb(0 0 0 / 65%);
+    transition:
+        background-color 180ms ease-out,
+        overlay 180ms allow-discrete,
+        display 180ms allow-discrete;
+}
+
+@starting-style {
+    .vehicle-dialog[open]::backdrop {
+        background-color: transparent;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vehicle-dialog,
+    .vehicle-dialog::backdrop {
+        transition: none;
+        transform: none;
+    }
 }
 
 .vehicle-dialog dt {
