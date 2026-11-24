@@ -79,6 +79,9 @@ export default function VehicleCard({ vehicle }) {
       </div>
       <VehicleDialog
         name={name}
+        price={vehicle.price}
+        description={vehicle.description}
+        media={media}
         meta={vehicle.meta}
         dialogRef={dialogRef}
         buttonRef={buttonRef}
