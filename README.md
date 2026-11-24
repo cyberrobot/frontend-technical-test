@@ -99,7 +99,7 @@ Screenshot baselines must first be generated in a consistent operating system,
 browser and font environment with `npm run test:browser:update`, then reviewed
 against the designs and committed. Review any later screenshot changes before
 updating them. Snapshots compare against the approved baseline, not directly
-against the supplied designs. No reviewed baselines are included yet.
+against the supplied designs.
 
 The pinned Playwright version supports Node 16. Keep Google Chrome up to date
 to verify the README's latest-Chrome browser support requirement.
