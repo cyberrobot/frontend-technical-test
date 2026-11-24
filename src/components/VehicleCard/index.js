@@ -29,6 +29,10 @@ export default function VehicleCard({ vehicle }) {
   const dialogRef = useRef(null);
   const buttonRef = useRef(null);
   const titleRef = useRef(null);
+  const descriptionCharacters = Array.from(vehicle.description || '');
+  const mobileDescription = descriptionCharacters.length > 36
+    ? `${descriptionCharacters.slice(0, 35).join('')}…`
+    : vehicle.description;
 
   return (
     <article className="vehicle-card">
@@ -58,7 +62,12 @@ export default function VehicleCard({ vehicle }) {
           </p>
           {vehicle.description && (
             <p className="vehicle-card__description">
-              {vehicle.description}
+              <span className="vehicle-card__description-full">
+                {vehicle.description}
+              </span>
+              <span className="vehicle-card__description-mobile">
+                {mobileDescription}
+              </span>
             </p>
           )}
         </div>
