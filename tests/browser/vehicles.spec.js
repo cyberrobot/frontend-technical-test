@@ -20,7 +20,7 @@ async function loadVehicles(page) {
             json: {
                 id,
                 price: '£30,000',
-                description: 'A refined sports saloon.',
+                description: 'A refined sports saloon with elegant design, responsive handling, and thoughtful details.',
                 meta: {
                     passengers: 5,
                     bodystyles: ['saloon'],
@@ -97,6 +97,33 @@ test('reduced motion and horizontal reflow', async ({ page }) => {
         () => document.documentElement.scrollWidth > window.innerWidth,
     );
     expect(overflow).toBe(false);
+});
+
+test('vehicle description truncates to 36 characters on mobile only', async ({
+    page,
+}) => {
+    const isMobile = page.viewportSize().width < 768;
+    const fullDescription = page.locator(
+        '.vehicle-card__description-full',
+    ).first();
+    const mobileDescription = page.locator(
+        '.vehicle-card__description-mobile',
+    ).first();
+
+    if (isMobile) {
+        await expect(mobileDescription).toBeVisible();
+        await expect(fullDescription).toBeHidden();
+        expect((await mobileDescription.textContent()).length).toBe(36);
+        await expect(mobileDescription).toHaveText(
+            'A refined sports saloon with elegan…',
+        );
+    } else {
+        await expect(fullDescription).toBeVisible();
+        await expect(mobileDescription).toBeHidden();
+        await expect(fullDescription).toHaveText(
+            'A refined sports saloon with elegant design, responsive handling, and thoughtful details.',
+        );
+    }
 });
 
 test('vehicle list visual baseline', async ({ page }) => {

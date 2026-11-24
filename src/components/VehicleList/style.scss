@@ -81,8 +81,17 @@
     margin: 0.5rem 0 0;
 }
 
+.vehicle-card__description-mobile {
+    display: inline;
+}
+
+.vehicle-card__description-full {
+    display: none;
+}
+
 .vehicle-card__details-button {
     align-self: center;
+    margin: 0.65rem 0 0;
 }
 
 .vehicle-dialog {
@@ -320,6 +329,19 @@
     .vehicle-card__description {
         font-size: 1rem;
     }
+
+    .vehicle-card__description-mobile {
+        display: none;
+    }
+
+    .vehicle-card__description-full {
+        display: inline;
+    }
+
+    .vehicle-card__details-button {
+        margin-top: 0.875rem;
+    }
+
 }
 
 @media (min-width: 75rem) {
